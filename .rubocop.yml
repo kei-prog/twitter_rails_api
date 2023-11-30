@@ -6,5 +6,10 @@ Style/Documentation:
   Enabled: false
 AllCops:
   NewCops: enable
+  Exclude:
+    - "db/migrate/**/*"
+    - "bin/**/*"
+    - "db/schema.rb"
+    - "config/initializers/**/*"
 RSpec/MultipleExpectations:
   Max: 2
