@@ -2,6 +2,7 @@ require:
   - rubocop-rails
   - rubocop-rspec
   - rubocop-hc
+  - rubocop-factory_bot
 Style/Documentation:
   Enabled: false
 AllCops:
