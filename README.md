@@ -1,24 +1,29 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- Ruby version  
+  3.2.1
 
-Things you may want to cover:
+- Docker ビルド
 
-* Ruby version
+```
+docker compose build
 
-* System dependencies
+```
 
-* Configuration
+- データベース作成
 
-* Database creation
+```
+docker compose run --rm api bin/rails db:create
+```
 
-* Database initialization
+- マイグレーション実行
 
-* How to run the test suite
+```
+docker compose run --rm api bin/rails db:migrate
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+- Rspec の実行
 
-* Deployment instructions
-
-* ...
+```
+docker compose run --rm  api bundle exec rspec
+```
