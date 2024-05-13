@@ -9,4 +9,8 @@ FactoryBot.define do
     birthday { '1990-01-01' }
     confirmed_at { Time.zone.now }
   end
+
+  factory :tweet do
+    body { 'FactoryBot Tweet' }
+  end
 end
