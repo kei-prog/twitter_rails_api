@@ -11,13 +11,13 @@ class Tweet < ApplicationRecord
 
   def image_type
     images.each do |image|
-      errors.add(:images, 'はjpeg、またはpng形式にしてください。') unless image.content_type.in?(%w[image/jpeg image/png])
+      errors.add(:images, :invalid_type) unless image.content_type.in?(%w[image/jpeg image/png])
     end
   end
 
   def image_size
     images.each do |image|
-      errors.add(:images, 'は5MB以下にしてください。') if image.byte_size > 5.megabytes
+      errors.add(:images, :too_large) if image.byte_size > 5.megabytes
     end
   end
 
@@ -25,7 +25,7 @@ class Tweet < ApplicationRecord
     return unless images.attached?
     return unless images.length > 4
 
-    errors.add(:images, 'は4枚まで投稿できます。')
+    errors.add(:images, :too_many)
   end
 
   def body_byte_size
