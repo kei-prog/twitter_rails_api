@@ -107,6 +107,7 @@ GEM
       activesupport (>= 5.0)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
+    idn-ruby (0.1.5)
     io-console (0.6.0)
     irb (1.7.4)
       reline (>= 0.3.6)
@@ -246,8 +247,14 @@ GEM
     ruby-progressbar (1.13.0)
     thor (1.2.2)
     timeout (0.4.0)
+    twitter-text (3.1.0)
+      idn-ruby
+      unf (~> 0.1.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.9.1)
     unicode-display_width (2.4.2)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -275,6 +282,7 @@ DEPENDENCIES
   rubocop-hc!
   rubocop-rails
   rubocop-rspec
+  twitter-text (~> 3.1)
   tzinfo-data
 
 RUBY VERSION
