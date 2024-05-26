@@ -23,3 +23,6 @@ ja:
               too_many: "は4枚まで投稿できます。"
             body:
               too_large: "は280文字以内で入力してください。"
+  query_parameters:
+    tweets:
+      invalid_query_parameters: "リミットは1から20、オフセットは0以上である必要があります。"
