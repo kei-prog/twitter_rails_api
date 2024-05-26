@@ -8,6 +8,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
   include DeviseTokenAuth::Concerns::User
 
+  has_many :tweets, dependent: :destroy
+
   validates :name, presence: true, length: { maximum: 50 }, uniqueness: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :introduction, length: { maximum: 160 }, allow_blank: true

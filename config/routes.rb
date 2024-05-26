@@ -8,6 +8,10 @@ Rails.application.routes.draw do
         confirmations: 'api/v1/users/confirmations',
         sessions: 'api/v1/users/sessions'
       }
+
+      resources :tweets, only: %i[create] do
+        resources :images, only: %i[create]
+      end
     end
   end
 
