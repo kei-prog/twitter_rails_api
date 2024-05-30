@@ -7,13 +7,23 @@ module Api
       DEFAULT_OFFSET = 0
       MAX_LIMIT = 20
 
-      before_action :authenticate_api_v1_user!, except: %i[index]
+      before_action :authenticate_api_v1_user!, except: %i[index show]
       before_action :validate_query_params, only: %i[index]
 
       def index
         tweets = Tweet.includes(:user).order(created_at: :desc).offset(@offset).limit(@limit)
 
         render json: tweets.as_json(include: { user: { only: :name } }), status: :ok
+      end
+
+      def show
+        tweet = Tweet.find_by(id: params[:id])
+
+        if tweet
+          render json: tweet.as_json(include: { user: { only: :name } }), status: :ok
+        else
+          render json: { errors: [I18n.t('activerecord.errors.models.tweet.not_found')] }, status: :not_found
+        end
       end
 
       def create
