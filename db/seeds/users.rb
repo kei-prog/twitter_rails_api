@@ -1,13 +1,22 @@
 # frozen_string_literal: true
 
-User.create!(
-  email: 'user@example.com',
-  name: 'Example User',
-  password: 'password',
-  password_confirmation: 'password',
-  confirmed_at: Time.zone.now,
-  birthday: '1990-01-01',
-  introduction: 'Hello, I am an example user.',
-  location: 'Tokyo',
-  website: 'https://example.com'
-)
+5.times do |i|
+  user = User.create!(
+    email: "user#{i + 1}@example.com",
+    name: "Example User #{i + 1}",
+    password: "password#{i + 1}",
+    password_confirmation: "password#{i + 1}",
+    confirmed_at: Time.zone.now,
+    birthday: "199#{i}-01-01",
+    introduction: "Hello, I am example user #{i + 1}.",
+    location: 'Tokyo',
+    website: "https://example#{i + 1}.com"
+  )
+
+  10.times do |j|
+    Tweet.create!(
+      user:,
+      body: "User#{i + 1} Seed Tweet #{j + 1}"
+    )
+  end
+end
