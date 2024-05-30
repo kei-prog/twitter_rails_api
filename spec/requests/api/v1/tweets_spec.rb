@@ -90,6 +90,36 @@ RSpec.describe 'Api::V1::Tweets' do
     end
   end
 
+  describe 'GET /show' do
+    let!(:tweet) { create(:tweet, user:) }
+
+    context 'with valid parameters' do
+      it 'returns the tweet' do
+        get api_v1_tweet_path(tweet)
+        json = response.parsed_body
+        expect(json['id']).to eq(tweet.id)
+      end
+
+      it 'returns a 200 status code' do
+        get api_v1_tweet_path(tweet)
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'with invalid parameters' do
+      it 'returns a 404 status code' do
+        get api_v1_tweet_path(id: 0)
+        expect(response).to have_http_status(:not_found)
+      end
+
+      it 'returns an error message' do
+        get api_v1_tweet_path(id: 0)
+        json = response.parsed_body
+        expect(json['errors']).to eq([I18n.t('activerecord.errors.models.tweet.not_found')])
+      end
+    end
+  end
+
   describe 'POST /create' do
     before do
       sign_in user

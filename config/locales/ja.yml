@@ -16,6 +16,7 @@ ja:
     errors:
       models:
         tweet:
+          not_found: "ツイートが見つかりません。"
           attributes:
             images:
               invalid_type: "はjpeg、またはpng形式にしてください。"
