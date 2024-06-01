@@ -32,6 +32,6 @@ class Tweet < ApplicationRecord
     parsed_tweet = Twitter::TwitterText::Validation.parse_tweet(body)
     return unless parsed_tweet[:weighted_length] > 280
 
-    errors.add(:body, 'は280文字以内で入力してください。')
+    errors.add(:body, :too_large)
   end
 end
