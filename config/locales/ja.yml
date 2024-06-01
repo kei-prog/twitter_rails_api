@@ -1,10 +1,12 @@
 ja:
-  models:
-    tweet: ツイート
-    user: ユーザ
+  activerecord:
+    models:
+      tweet: ツイート
+      user: ユーザ
     attributes:
       tweet:
         body: 本文
+        images: 画像
       user:
         name: 名前
         introduction: 自己紹介
@@ -12,7 +14,6 @@ ja:
         website: ウェブサイト
         birthday: 誕生日
         email: メールアドレス
-  activerecord:
     errors:
       models:
         tweet:
