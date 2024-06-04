@@ -12,6 +12,10 @@ Rails.application.routes.draw do
       resources :tweets, only: %i[index create show] do
         resources :images, only: %i[create]
       end
+
+      resource :profile, only: %i[update]
+
+      resources :users, only: %i[show]
     end
   end
 
