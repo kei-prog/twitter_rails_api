@@ -8,6 +8,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
   include DeviseTokenAuth::Concerns::User
 
+  has_one_attached :avatar
+  has_one_attached :header
   has_many :tweets, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 50 }, uniqueness: true
@@ -16,4 +18,12 @@ class User < ApplicationRecord
   validates :location, length: { maximum: 30 }, allow_blank: true
   validates :website, length: { maximum: 100 }, allow_blank: true
   validates :birthday, presence: true
+
+  def avatar_url
+    Rails.application.routes.url_helpers.rails_blob_url(avatar, host: 'localhost:3000') if avatar.attached?
+  end
+
+  def header_url
+    Rails.application.routes.url_helpers.rails_blob_url(header, host: 'localhost:3000') if header.attached?
+  end
 end
