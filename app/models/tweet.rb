@@ -7,6 +7,14 @@ class Tweet < ApplicationRecord
 
   validate :image_type, :image_size, :image_count, :body_byte_size
 
+  def as_json(options = {})
+    super(options).merge({ images: images.map do |image|
+                                     Rails.application.routes.url_helpers.rails_blob_url(
+                                       image, host: 'localhost:3000'
+                                     )
+                                   end })
+  end
+
   private
 
   def image_type
@@ -32,6 +40,6 @@ class Tweet < ApplicationRecord
     parsed_tweet = Twitter::TwitterText::Validation.parse_tweet(body)
     return unless parsed_tweet[:weighted_length] > 280
 
-    errors.add(:body, 'は280文字以内で入力してください。')
+    errors.add(:body, :too_large)
   end
 end
