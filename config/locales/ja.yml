@@ -16,6 +16,8 @@ ja:
         email: メールアドレス
     errors:
       models:
+        user:
+          not_found: "ユーザが見つかりません。"
         tweet:
           not_found: "ツイートが見つかりません。"
           attributes:
