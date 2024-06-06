@@ -9,7 +9,7 @@ module Api
       before_action :validate_query_params, only: %i[index]
 
       def index
-        tweets = Tweet.includes(:user).order(created_at: :desc).offset(@offset).limit(@limit)
+        tweets = Tweet.recent(@offset, @limit)
 
         render json: tweets.as_json(include: { user: { only: :name } }), status: :ok
       end
