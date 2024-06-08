@@ -33,6 +33,17 @@ module Api
         end
       end
 
+      def destroy
+        tweet = current_api_v1_user.tweets.find_by(id: params[:id])
+
+        if tweet
+          tweet.destroy
+          head :no_content
+        else
+          render json: { errors: [I18n.t('activerecord.errors.models.tweet.not_found')] }, status: :not_found
+        end
+      end
+
       private
 
       def tweet_params
