@@ -9,7 +9,7 @@ Rails.application.routes.draw do
         sessions: 'api/v1/users/sessions'
       }
 
-      resources :tweets, only: %i[index create show] do
+      resources :tweets, only: %i[index create show destroy] do
         resources :images, only: %i[create]
       end
 
