@@ -151,4 +151,38 @@ RSpec.describe 'Api::V1::Tweets' do
       end
     end
   end
+
+  describe 'DELETE /destroy' do
+    let!(:tweet) { create(:tweet, user:) }
+
+    before do
+      sign_in user
+    end
+
+    context 'when valid parameters' do
+      it 'deletes the tweet' do
+        expect do
+          delete api_v1_tweet_path(tweet)
+        end.to change(Tweet, :count).by(-1)
+      end
+
+      it 'returns a 204 status code' do
+        delete api_v1_tweet_path(tweet)
+        expect(response).to have_http_status(:no_content)
+      end
+    end
+
+    context 'when invalid parameters' do
+      it 'returns a 404 status code' do
+        delete api_v1_tweet_path(id: 0)
+        expect(response).to have_http_status(:not_found)
+      end
+
+      it 'returns an error message' do
+        delete api_v1_tweet_path(id: 0)
+        json = response.parsed_body
+        expect(json['errors']).to eq([I18n.t('activerecord.errors.models.tweet.not_found')])
+      end
+    end
+  end
 end
