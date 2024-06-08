@@ -11,14 +11,14 @@ module Api
       def index
         tweets = Tweet.recent(@offset, @limit)
 
-        render json: tweets.as_json(include: { user: { only: :name } }), status: :ok
+        render json: tweets.as_json(include: { user: { methods: :avatar_url, only: %i[id name] } }), status: :ok
       end
 
       def show
         tweet = Tweet.find_by(id: params[:id])
 
         if tweet
-          render json: tweet.as_json(include: { user: { only: :name } }), status: :ok
+          render json: tweet.as_json(include: { user: { methods: :avatar_url, only: %i[id name] } }), status: :ok
         else
           render json: { errors: [I18n.t('activerecord.errors.models.tweet.not_found')] }, status: :not_found
         end
