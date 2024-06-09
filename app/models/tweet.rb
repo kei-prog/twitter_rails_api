@@ -15,6 +15,8 @@ class Tweet < ApplicationRecord
                                    end })
   end
 
+  scope :recent, ->(offset, limit) { order(created_at: :desc).offset(offset).limit(limit) }
+
   private
 
   def image_type
