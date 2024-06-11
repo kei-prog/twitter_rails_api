@@ -27,9 +27,20 @@ module Api
       def create
         @tweet = current_api_v1_user.tweets.build(tweet_params)
         if @tweet.save
-          render json: @tweet.as_json(include: { user: { only: :name } }), status: :created
+          render json: @tweet.as_json(include: { user: { methods: :avatar_url, only: %i[id name] } }), status: :created
         else
           render json: { errors: @tweet.errors.full_messages }, status: :unprocessable_entity
+        end
+      end
+
+      def destroy
+        tweet = current_api_v1_user.tweets.find_by(id: params[:id])
+
+        if tweet
+          tweet.destroy
+          head :no_content
+        else
+          render json: { errors: [I18n.t('activerecord.errors.models.tweet.not_found')] }, status: :not_found
         end
       end
 
