@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_one_attached :header
   has_many :tweets, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 50 }, uniqueness: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
