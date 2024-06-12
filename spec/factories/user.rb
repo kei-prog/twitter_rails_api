@@ -13,4 +13,8 @@ FactoryBot.define do
   factory :tweet do
     body { 'FactoryBot Tweet' }
   end
+
+  factory :comment do
+    body { 'FactoryBot Comment' }
+  end
 end
