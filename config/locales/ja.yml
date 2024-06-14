@@ -4,6 +4,8 @@ ja:
       tweet: ツイート
       user: ユーザ
     attributes:
+      comment:
+        body: 本文
       tweet:
         body: 本文
         images: 画像
@@ -25,6 +27,10 @@ ja:
               invalid_type: "はjpeg、またはpng形式にしてください。"
               too_large: "は5MB以下にしてください。"
               too_many: "は4枚まで投稿できます。"
+            body:
+              too_large: "は280文字以内で入力してください。"
+        comment:
+          attributes:
             body:
               too_large: "は280文字以内で入力してください。"
   query_parameters:
