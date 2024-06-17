@@ -18,7 +18,9 @@ Rails.application.routes.draw do
 
       resource :profile, only: %i[update]
 
-      resources :users, only: %i[show]
+      resources :users, only: %i[show] do
+        resources :comments, only: %i[index]
+      end
     end
   end
 
