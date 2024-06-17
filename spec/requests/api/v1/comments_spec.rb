@@ -25,6 +25,18 @@ RSpec.describe 'Api::V1::Comments' do
         get api_v1_tweet_comments_path(tweet)
         expect(response).to have_http_status(:ok)
       end
+
+      it 'returns a list of comments by user' do
+        create_list(:comment, 10, user:, tweet:)
+        get api_v1_user_comments_path(user)
+        json = response.parsed_body
+        expect(json).not_to be_empty
+      end
+
+      it 'returns a 200 status code for user comments' do
+        get api_v1_user_comments_path(user)
+        expect(response).to have_http_status(:ok)
+      end
     end
 
     context 'when invalid parameters' do
