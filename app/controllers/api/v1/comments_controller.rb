@@ -8,12 +8,10 @@ module Api
       before_action :validate_query_params, only: %i[index]
 
       def index
-        tweet = Tweet.find_by(id: params[:tweet_id])
-        if tweet
-          comments = tweet.comments.recent(@offset, @limit)
-          render json: comments.as_json(include: { user: { methods: :avatar_url, only: %i[id name] } }), status: :ok
-        else
-          render json: { errors: [I18n.t('activerecord.errors.models.tweet.not_found')] }, status: :not_found
+        if params[:tweet_id]
+          index_comments_by_tweet
+        elsif params[:user_id]
+          index_comments_by_user
         end
       end
 
@@ -37,6 +35,26 @@ module Api
       end
 
       private
+
+      def index_comments_by_tweet
+        tweet = Tweet.find_by(id: params[:tweet_id])
+        if tweet
+          comments = tweet.comments.recent(@offset, @limit)
+          render json: comments.as_json(include: { user: { methods: :avatar_url, only: %i[id name] } }), status: :ok
+        else
+          render json: { errors: [I18n.t('activerecord.errors.models.tweet.not_found')] }, status: :not_found
+        end
+      end
+
+      def index_comments_by_user
+        user = User.find_by(id: params[:user_id])
+        if user
+          comments = user.comments.recent(@offset, @limit)
+          render json: comments.as_json(include: { user: { methods: :avatar_url, only: %i[id name] } }), status: :ok
+        else
+          render json: { errors: [I18n.t('activerecord.errors.models.user.not_found')] }, status: :not_found
+        end
+      end
 
       def comment_params
         params.require(:comment).permit(:body).merge(tweet_id: params[:tweet_id])
