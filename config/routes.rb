@@ -14,6 +14,8 @@ Rails.application.routes.draw do
         resources :comments, only: %i[index create]
       end
 
+      resources :comments, only: %i[destroy]
+
       resource :profile, only: %i[update]
 
       resources :users, only: %i[show]
