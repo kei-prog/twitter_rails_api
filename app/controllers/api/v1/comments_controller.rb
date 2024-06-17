@@ -26,6 +26,16 @@ module Api
         end
       end
 
+      def destroy
+        comment = current_api_v1_user.comments.find_by(id: params[:id])
+        if comment
+          comment.destroy
+          head :no_content
+        else
+          render json: { errors: [I18n.t('activerecord.errors.models.comment.not_found')] }, status: :not_found
+        end
+      end
+
       private
 
       def comment_params

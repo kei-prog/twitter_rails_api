@@ -30,6 +30,7 @@ ja:
             body:
               too_large: "は280文字以内で入力してください。"
         comment:
+          not_found: "コメントが見つかりません。"
           attributes:
             body:
               too_large: "は280文字以内で入力してください。"
