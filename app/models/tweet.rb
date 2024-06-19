@@ -20,6 +20,10 @@ class Tweet < ApplicationRecord
 
   scope :recent, ->(offset, limit) { order(created_at: :desc).offset(offset).limit(limit) }
 
+  def retweet_count
+    retweets.count
+  end
+
   private
 
   def image_type
