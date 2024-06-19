@@ -25,6 +25,18 @@ RSpec.describe 'Api::V1::Comments' do
         get api_v1_tweet_comments_path(tweet)
         expect(response).to have_http_status(:ok)
       end
+
+      it 'returns a list of comments by user' do
+        create_list(:comment, 10, user:, tweet:)
+        get api_v1_user_comments_path(user)
+        json = response.parsed_body
+        expect(json).not_to be_empty
+      end
+
+      it 'returns a 200 status code for user comments' do
+        get api_v1_user_comments_path(user)
+        expect(response).to have_http_status(:ok)
+      end
     end
 
     context 'when invalid parameters' do
@@ -71,6 +83,40 @@ RSpec.describe 'Api::V1::Comments' do
       it 'returns a 400 status code' do
         post api_v1_tweet_comments_path(tweet), params: { comment: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+  end
+
+  describe 'DELETE /destroy' do
+    let!(:comment) { create(:comment, user:, tweet:) }
+
+    before do
+      sign_in user
+    end
+
+    context 'when valid parameters' do
+      it 'deletes the comment' do
+        expect do
+          delete api_v1_comment_path(comment)
+        end.to change(Comment, :count).by(-1)
+      end
+
+      it 'returns a 204 status code' do
+        delete api_v1_comment_path(comment)
+        expect(response).to have_http_status(:no_content)
+      end
+    end
+
+    context 'when invalid parameters' do
+      it 'returns a 404 status code' do
+        delete api_v1_comment_path(id: 0)
+        expect(response).to have_http_status(:not_found)
+      end
+
+      it 'returns an error message' do
+        delete api_v1_comment_path(id: 0)
+        json = response.parsed_body
+        expect(json['errors']).to eq([I18n.t('activerecord.errors.models.comment.not_found')])
       end
     end
   end

@@ -33,7 +33,7 @@ users.each do |user|
       Comment.create!(
         user: user[:user],
         tweet: target_data[:last_tweet],
-        body: "Comment #{k + 1}"
+        body: "Comment #{k + 1} by #{user[:user].name} on #{target_data[:last_tweet].body}"
       )
     end
   end
