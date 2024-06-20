@@ -1,2 +1,8 @@
-class Api::V1::FavoritesController < ApplicationController
+# frozen_string_literal: true
+
+module Api
+  module V1
+    class FavoritesController < ApplicationController
+    end
+  end
 end
