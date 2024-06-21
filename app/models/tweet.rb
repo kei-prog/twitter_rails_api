@@ -5,6 +5,7 @@ class Tweet < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :retweets, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   has_many_attached :images
 
   validate :image_type, :image_size, :image_count
