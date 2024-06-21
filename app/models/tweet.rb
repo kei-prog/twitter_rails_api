@@ -25,6 +25,10 @@ class Tweet < ApplicationRecord
     retweets.count
   end
 
+  def favorite_count
+    favorites.count
+  end
+
   private
 
   def image_type
