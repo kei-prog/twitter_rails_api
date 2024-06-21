@@ -11,7 +11,8 @@ module Api
       def index
         tweets = Tweet.recent(@offset, @limit)
 
-        render json: tweets.as_json(include: { user: { methods: :avatar_url, only: %i[id name] } }), status: :ok
+        render json: tweets.as_json(include: { user: { methods: :avatar_url, only: %i[id name] } },
+                                    methods: :retweet_count), status: :ok
       end
 
       def show

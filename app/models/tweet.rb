@@ -4,6 +4,7 @@ class Tweet < ApplicationRecord
   include BodyValidation
   belongs_to :user
   has_many :comments, dependent: :destroy
+  has_many :retweets, dependent: :destroy
   has_many_attached :images
 
   validate :image_type, :image_size, :image_count
@@ -18,6 +19,10 @@ class Tweet < ApplicationRecord
   end
 
   scope :recent, ->(offset, limit) { order(created_at: :desc).offset(offset).limit(limit) }
+
+  def retweet_count
+    retweets.count
+  end
 
   private
 
