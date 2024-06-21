@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         resources :images, only: %i[create]
         resources :comments, only: %i[index create]
         post 'toggle_retweet', to: 'retweets#toggle_retweet'
+        post 'toggle_favorite', to: 'favorites#toggle_favorite'
       end
 
       resources :comments, only: %i[destroy]
