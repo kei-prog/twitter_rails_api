@@ -19,3 +19,4 @@ RSpec/ExampleLength:
 Hc/RailsSpecificActionName:
   Exclude:
     - "app/controllers/api/v1/retweets_controller.rb"
+    - "app/controllers/api/v1/favorites_controller.rb"
