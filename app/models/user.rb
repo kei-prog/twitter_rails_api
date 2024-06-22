@@ -35,4 +35,8 @@ class User < ApplicationRecord
   def header_url
     Rails.application.routes.url_helpers.rails_blob_url(header, host: 'localhost:3000') if header.attached?
   end
+
+  def following?(user)
+    following.include?(user)
+  end
 end
