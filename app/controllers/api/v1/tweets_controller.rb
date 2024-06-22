@@ -12,7 +12,7 @@ module Api
         tweets = Tweet.recent(@offset, @limit)
 
         render json: tweets.as_json(include: { user: { methods: :avatar_url, only: %i[id name] } },
-                                    methods: :retweet_count), status: :ok
+                                    methods: %i[retweet_count favorite_count]), status: :ok
       end
 
       def show
