@@ -14,12 +14,12 @@ RSpec.describe 'Api::V1::Follows' do
     context 'when creating a follow' do
       it 'creates a Follow' do
         expect do
-          post api_v1_user_follows_path(user, user_id: followed_user.id)
+          post api_v1_user_follows_path(user_id: followed_user.id)
         end.to change(Follow, :count).by(1)
       end
 
       it 'returns a 201 status code' do
-        post api_v1_user_follows_path(user, user_id: followed_user.id)
+        post api_v1_user_follows_path(user_id: followed_user.id)
         expect(response).to have_http_status(:created)
       end
     end
