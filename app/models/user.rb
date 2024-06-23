@@ -20,6 +20,9 @@ class User < ApplicationRecord
   has_many :passive_follows, class_name: 'Follow', foreign_key: 'followed_id', dependent: :destroy,
                              inverse_of: :followed
   has_many :followers, through: :passive_follows, source: :follower
+  has_many :notifications, dependent: :destroy
+  has_many :send_user, class_name: 'Notification', foreign_key: 'send_user_id', dependent: :destroy,
+                       inverse_of: :send_user
 
   validates :name, presence: true, length: { maximum: 50 }, uniqueness: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
