@@ -4,13 +4,11 @@ require 'rails_helper'
 
 RSpec.describe 'Api::V1::Users::Sessions' do
   describe 'POST /api/v1/users/sign_in' do
-    before do
-      create(:user)
-    end
+    let(:user) { create(:user) }
 
     it 'logs in the user' do
       post '/api/v1/users/sign_in', params: {
-        email: 'test@example.com', password: 'password'
+        email: user.email, password: 'password'
       }
 
       expect(response).to have_http_status(:ok)
@@ -19,7 +17,7 @@ RSpec.describe 'Api::V1::Users::Sessions' do
 
     it 'does not log in the user' do
       post '/api/v1/users/sign_in', params: {
-        email: 'test@example.com', password: 'wrong_password'
+        email: user.email, password: 'wrong_password'
       }
 
       expect(response).to have_http_status(:unauthorized)

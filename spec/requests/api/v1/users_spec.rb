@@ -6,7 +6,10 @@ RSpec.describe 'Api::V1::Users' do
   describe 'GET /api/v1/users/:id' do
     let(:user) { create(:user) }
 
-    before { create_list(:tweet, 30, user:) }
+    before do
+      create_list(:tweet, 30, user:)
+      sign_in user
+    end
 
     context 'when valid parameters' do
       before { get api_v1_user_path(user.id), params: { limit: 20 } }

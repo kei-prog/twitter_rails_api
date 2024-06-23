@@ -14,6 +14,12 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :retweets, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :active_follows, class_name: 'Follow', foreign_key: 'follower_id', dependent: :destroy,
+                            inverse_of: :follower
+  has_many :following, through: :active_follows, source: :followed
+  has_many :passive_follows, class_name: 'Follow', foreign_key: 'followed_id', dependent: :destroy,
+                             inverse_of: :followed
+  has_many :followers, through: :passive_follows, source: :follower
 
   validates :name, presence: true, length: { maximum: 50 }, uniqueness: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -28,5 +34,9 @@ class User < ApplicationRecord
 
   def header_url
     Rails.application.routes.url_helpers.rails_blob_url(header, host: 'localhost:3000') if header.attached?
+  end
+
+  def following?(user)
+    following.include?(user)
   end
 end
