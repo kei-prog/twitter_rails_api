@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resources :users, only: %i[show] do
         resources :comments, only: %i[index]
         resources :follows, only: %i[create]
+        resource :follows, only: %i[destroy]
       end
     end
   end
