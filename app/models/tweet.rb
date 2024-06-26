@@ -2,6 +2,7 @@
 
 class Tweet < ApplicationRecord
   include BodyValidation
+  include Sortable
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :retweets, dependent: :destroy
@@ -18,8 +19,6 @@ class Tweet < ApplicationRecord
                                      )
                                    end })
   end
-
-  scope :recent, ->(offset, limit) { order(created_at: :desc).offset(offset).limit(limit) }
 
   def retweet_count
     retweets.count
