@@ -28,7 +28,7 @@ module Api
       end
 
       def render_invalid_params
-        render json: { errors: [I18n.t('query_parameters.tweets.invalid_query_parameters')] }, status: :bad_request
+        render json: { errors: [I18n.t('query_parameters.invalid_query_parameters')] }, status: :bad_request
       end
     end
   end

@@ -34,7 +34,7 @@ RSpec.describe 'Api::V1::Notifications' do
 
       it 'failed to get notifications' do
         json = response.parsed_body
-        expect(json['errors']).to eq([I18n.t('query_parameters.tweets.invalid_query_parameters')])
+        expect(json['errors']).to eq([I18n.t('query_parameters.invalid_query_parameters')])
       end
 
       it 'returns a 400 status code' do

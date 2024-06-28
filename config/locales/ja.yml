@@ -35,7 +35,4 @@ ja:
             body:
               too_large: "は280文字以内で入力してください。"
   query_parameters:
-    tweets:
-      invalid_query_parameters: "リミットは1から20、オフセットは0以上である必要があります。"
-    comments:
-      invalid_query_parameters: "リミットは1から20、オフセットは0以上である必要があります。"
+    invalid_query_parameters: "リミットは1から20、オフセットは0以上である必要があります。"

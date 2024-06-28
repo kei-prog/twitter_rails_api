@@ -46,7 +46,7 @@ RSpec.describe 'Api::V1::Comments' do
 
       it 'failed to get comments' do
         json = response.parsed_body
-        expect(json['errors']).to eq([I18n.t('query_parameters.comments.invalid_query_parameters')])
+        expect(json['errors']).to eq([I18n.t('query_parameters.invalid_query_parameters')])
       end
 
       it 'returns a 400 status code' do

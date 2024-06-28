@@ -29,7 +29,7 @@ RSpec.describe 'Api::V1::Tweets' do
 
       it 'failed to get tweets' do
         json = response.parsed_body
-        expect(json['errors']).to eq([I18n.t('query_parameters.tweets.invalid_query_parameters')])
+        expect(json['errors']).to eq([I18n.t('query_parameters.invalid_query_parameters')])
       end
 
       it 'returns a 400 status code' do
