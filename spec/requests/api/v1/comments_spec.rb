@@ -64,7 +64,7 @@ RSpec.describe 'Api::V1::Comments' do
       it 'creates a new Comment' do
         expect do
           post api_v1_tweet_comments_path(tweet), params: { comment: valid_attributes }
-        end.to change(Comment, :count).by(1)
+        end.to change(Comment, :count).by(1).and change(Notification, :count).by(1)
       end
 
       it 'returns a 201 status code' do

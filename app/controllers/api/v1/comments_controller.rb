@@ -18,6 +18,7 @@ module Api
       def create
         comment = current_api_v1_user.comments.build(comment_params)
         if comment.save
+          comment.create_notification(current_api_v1_user)
           render json: comment, status: :created
         else
           render json: { errors: comment.errors.full_messages }, status: :unprocessable_entity
