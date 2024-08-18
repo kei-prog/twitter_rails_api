@@ -6,7 +6,7 @@ class Notification < ApplicationRecord
   belongs_to :send_user, class_name: 'User'
   belongs_to :target, polymorphic: true
 
-  enum :notification_type, { follow: 0, like: 1, comment: 2 }
+  enum :notification_type, { follow: 0, favorite: 1, comment: 2 }
 
   validates :notification_type, presence: true, inclusion: { in: Notification.notification_types.keys }
 

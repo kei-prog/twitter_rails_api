@@ -10,8 +10,8 @@ FactoryBot.define do
       target factory: :user
     end
 
-    trait :for_like do
-      notification_type { :like }
+    trait :for_favorite do
+      notification_type { :favorite }
       target factory: :tweet
     end
 
