@@ -11,7 +11,8 @@ module Api
           favorite.destroy!
           head :no_content
         else
-          current_api_v1_user.favorites.create!(tweet_id: params[:tweet_id])
+          favorite = current_api_v1_user.favorites.create!(tweet_id: params[:tweet_id])
+          favorite.create_notification(current_api_v1_user)
           head :created
         end
       end

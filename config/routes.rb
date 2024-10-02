@@ -17,8 +17,8 @@ Rails.application.routes.draw do
       end
 
       resources :comments, only: %i[destroy]
-
       resource :profile, only: %i[update]
+      resources :notifications, only: %i[index]
 
       resources :users, only: %i[show] do
         resources :comments, only: %i[index]

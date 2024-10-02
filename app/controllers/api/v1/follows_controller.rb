@@ -6,7 +6,8 @@ module Api
       before_action :authenticate_api_v1_user!, only: %i[create]
 
       def create
-        Follow.create!(follower_id: current_api_v1_user.id, followed_id: params[:user_id])
+        follow = Follow.create!(follower_id: current_api_v1_user.id, followed_id: params[:user_id])
+        follow.create_notification(current_api_v1_user)
         head :created
       end
 

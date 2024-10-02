@@ -27,14 +27,23 @@ users = []
 
   users << { user:, last_tweet: tweets.last }
 end
+
 users.each do |user|
   users.each do |target_data|
     5.times do |k|
-      Comment.create!(
+      comment = Comment.create!(
         user: user[:user],
         tweet: target_data[:last_tweet],
         body: "Comment #{k + 1} by #{user[:user].name} on #{target_data[:last_tweet].body}"
       )
+
+      comment.create_notification(user[:user])
     end
   end
+
+  follow = Follow.create!(follower: user[:user], followed: users.first[:user])
+  follow.create_notification(user[:user])
+
+  favorite = Favorite.create!(user: user[:user], tweet: users.first[:last_tweet])
+  favorite.create_notification(user[:user])
 end

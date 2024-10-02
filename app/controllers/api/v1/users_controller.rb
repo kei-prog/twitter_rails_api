@@ -27,7 +27,8 @@ module Api
               header_url: user.header_url,
               following: current_api_v1_user.following?(user),
               tweets: tweets.as_json(include: { user: { methods: :avatar_url, only: :name } },
-                                     only: %i[id body created_at])
+                                     only: %i[id body created_at],
+                                     methods: %i[retweet_count favorite_count])
             )
       end
     end

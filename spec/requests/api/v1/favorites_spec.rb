@@ -15,7 +15,7 @@ RSpec.describe 'Api::V1::Favorites' do
       it 'creates a favorite' do
         expect do
           post api_v1_tweet_toggle_favorite_path(tweet)
-        end.to change(Favorite, :count).by(1)
+        end.to change(Favorite, :count).by(1).and change(Notification, :count).by(1)
       end
 
       it 'returns a 201 status code' do

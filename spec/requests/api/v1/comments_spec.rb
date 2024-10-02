@@ -46,7 +46,7 @@ RSpec.describe 'Api::V1::Comments' do
 
       it 'failed to get comments' do
         json = response.parsed_body
-        expect(json['errors']).to eq([I18n.t('query_parameters.comments.invalid_query_parameters')])
+        expect(json['errors']).to eq([I18n.t('query_parameters.invalid_query_parameters')])
       end
 
       it 'returns a 400 status code' do
@@ -64,7 +64,7 @@ RSpec.describe 'Api::V1::Comments' do
       it 'creates a new Comment' do
         expect do
           post api_v1_tweet_comments_path(tweet), params: { comment: valid_attributes }
-        end.to change(Comment, :count).by(1)
+        end.to change(Comment, :count).by(1).and change(Notification, :count).by(1)
       end
 
       it 'returns a 201 status code' do

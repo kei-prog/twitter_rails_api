@@ -11,6 +11,7 @@ FactoryBot.define do
   end
 
   factory :tweet do
+    user
     body { 'FactoryBot Tweet' }
   end
 

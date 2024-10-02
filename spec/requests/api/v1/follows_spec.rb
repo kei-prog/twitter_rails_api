@@ -15,7 +15,7 @@ RSpec.describe 'Api::V1::Follows' do
       it 'creates a Follow' do
         expect do
           post api_v1_user_follows_path(user_id: followed_user.id)
-        end.to change(Follow, :count).by(1)
+        end.to change(Follow, :count).by(1).and change(Notification, :count).by(1)
       end
 
       it 'returns a 201 status code' do
