@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_09_084815) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_12_073927) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -69,6 +69,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_09_084815) do
     t.index ["followed_id"], name: "index_follows_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_follows_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_follows_on_follower_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.bigint "sender_id", null: false
+    t.bigint "recipient_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipient_id"], name: "index_groups_on_recipient_id"
+    t.index ["sender_id", "recipient_id"], name: "index_groups_on_sender_id_and_recipient_id", unique: true
+    t.index ["sender_id"], name: "index_groups_on_sender_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -145,6 +155,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_09_084815) do
   add_foreign_key "favorites", "users"
   add_foreign_key "follows", "users", column: "followed_id"
   add_foreign_key "follows", "users", column: "follower_id"
+  add_foreign_key "groups", "users", column: "recipient_id"
+  add_foreign_key "groups", "users", column: "sender_id"
   add_foreign_key "notifications", "users"
   add_foreign_key "notifications", "users", column: "send_user_id"
   add_foreign_key "retweets", "tweets"
