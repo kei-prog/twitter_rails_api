@@ -41,6 +41,13 @@ users.each do |user|
     end
   end
 
+  next if user[:user] == users.first[:user]
+
+  Group.create!(
+    sender: user[:user],
+    recipient: users.first[:user]
+  )
+
   follow = Follow.create!(follower: user[:user], followed: users.first[:user])
   follow.create_notification(user[:user])
 
