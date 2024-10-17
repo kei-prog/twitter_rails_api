@@ -1,2 +1,8 @@
-class Api::V1::MessagesController < ApplicationController
+# frozen_string_literal: true
+
+module Api
+  module V1
+    class MessagesController < ApplicationController
+    end
+  end
 end
