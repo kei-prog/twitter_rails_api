@@ -43,10 +43,26 @@ users.each do |user|
 
   next if user[:user] == users.first[:user]
 
-  Group.create!(
+  group = Group.create!(
     sender: user[:user],
     recipient: users.first[:user]
   )
+
+  3.times do |m|
+    Message.create!(
+      group:,
+      sender: user[:user],
+      content: "Message #{m + 1} from #{user[:user].name} to #{users.first[:user].name}"
+    )
+  end
+
+  3.times do |m|
+    Message.create!(
+      group:,
+      sender: users.first[:user],
+      content: "Message #{m + 1} from #{users.first[:user].name} to #{user[:user].name}"
+    )
+  end
 
   follow = Follow.create!(follower: user[:user], followed: users.first[:user])
   follow.create_notification(user[:user])
