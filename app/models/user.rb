@@ -27,6 +27,7 @@ class User < ApplicationRecord
   has_many :sent_groups, class_name: 'Group', foreign_key: 'sender_id', dependent: :destroy, inverse_of: :sender
   has_many :received_groups, class_name: 'Group', foreign_key: 'recipient_id', dependent: :destroy,
                              inverse_of: :recipient
+  has_many :messages, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 50 }, uniqueness: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
