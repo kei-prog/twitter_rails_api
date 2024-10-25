@@ -6,5 +6,7 @@ class CreateGroups < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+
+    add_index :groups, %i[sender_id recipient_id], unique: true
   end
 end
