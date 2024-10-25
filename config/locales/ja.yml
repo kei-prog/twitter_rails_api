@@ -37,6 +37,9 @@ ja:
               too_large: "は280文字以内で入力してください。"
         group:
           same_user: "送信者と受信者は異なる必要があります。"
-          group_already_exists: "グループはすでに存在します。"
+        message:
+          attributes:
+            body:
+              too_large: "は280文字以内で入力してください。"
   query_parameters:
     invalid_query_parameters: "リミットは1から20、オフセットは0以上である必要があります。"
