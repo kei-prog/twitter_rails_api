@@ -25,6 +25,10 @@ Rails.application.routes.draw do
         resources :follows, only: %i[create]
         resource :follows, only: %i[destroy]
       end
+
+      resources :groups, only: %i[index create] do
+        resources :messages, only: %i[index create]
+      end
     end
   end
 
