@@ -15,6 +15,8 @@ users = []
     website: "https://example#{i + 1}.com"
   )
 
+  user.avatar.attach(io: Rails.root.join('spec/fixtures/files/test.jpeg').open, filename: 'test.jpeg')
+
   tweets = []
 
   10.times do |j|
