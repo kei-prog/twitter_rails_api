@@ -13,11 +13,11 @@ class Tweet < ApplicationRecord
   validate_body_byte_size :body
 
   def as_json(options = {})
-    super(options).merge({ images: images.map do |image|
-                                     Rails.application.routes.url_helpers.rails_blob_url(
-                                       image, host: 'localhost:3000'
-                                     )
-                                   end })
+    super.merge({ images: images.map do |image|
+      Rails.application.routes.url_helpers.rails_blob_url(
+        image, host: 'localhost:3000'
+      )
+    end })
   end
 
   def retweet_count
