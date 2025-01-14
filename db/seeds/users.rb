@@ -2,7 +2,7 @@
 
 users = []
 
-5.times do |i|
+50.times do |i|
   user = User.create!(
     email: "user#{i + 1}@example.com",
     name: "Example User #{i + 1}",
