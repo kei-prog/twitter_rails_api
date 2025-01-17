@@ -1,7 +1,11 @@
-class Api::V1::BookmarksController < ApplicationController
-  def index
-  end
+# frozen_string_literal: true
 
-  def create
+module Api
+  module V1
+    class BookmarksController < ApplicationController
+      def index; end
+
+      def create; end
+    end
   end
 end
