@@ -3,8 +3,6 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      get 'bookmarks/index'
-      get 'bookmarks/create'
       mount_devise_token_auth_for 'User', at: 'users', controllers: {
         registrations: 'api/v1/users/registrations',
         confirmations: 'api/v1/users/confirmations',
@@ -16,11 +14,13 @@ Rails.application.routes.draw do
         resources :comments, only: %i[index create]
         post 'toggle_retweet', to: 'retweets#toggle_retweet'
         post 'toggle_favorite', to: 'favorites#toggle_favorite'
+        post 'toggle_bookmark', to: 'bookmarks#toggle_bookmark'
       end
 
       resources :comments, only: %i[destroy]
       resource :profile, only: %i[update]
       resources :notifications, only: %i[index]
+      resources :bookmarks, only: %i[index]
 
       resources :users, only: %i[show] do
         resources :comments, only: %i[index]
