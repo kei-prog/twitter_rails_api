@@ -23,12 +23,6 @@ class Group < ApplicationRecord
     )
   end
 
-  def self.exists?(sender_id:, recipient_id:)
-    where(sender_id:, recipient_id:).or(
-      where(sender_id: recipient_id, recipient_id: sender_id)
-    ).exists?
-  end
-
   private
 
   def unique_sender_and_recipient

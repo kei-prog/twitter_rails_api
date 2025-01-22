@@ -13,8 +13,7 @@ module Api
       end
 
       def create
-        message = Message.new(sender_id: current_api_v1_user.id, group_id: params[:group_id],
-                              content: params[:content])
+        message = current_api_v1_user.messages.build(group_id: params[:group_id], content: params[:content])
         if message.save
           render json: message.as_json(include: { sender: { only: %i[id] } }), status: :created
         else

@@ -19,17 +19,24 @@ module Api
       end
 
       def create
-        if Group.exists?(sender_id: current_api_v1_user.id, recipient_id: params[:recipient_id])
+        if group_exists?
           head :ok
           return
         end
 
-        group = Group.new(sender_id: current_api_v1_user.id, recipient_id: params[:recipient_id])
+        group = current_api_v1_user.sent_groups.build(recipient_id: params[:recipient_id])
         if group.save
           head :created
         else
           render json: { errors: group.errors.full_messages }, status: :unprocessable_entity
         end
+      end
+
+      private
+
+      def group_exists?
+        current_api_v1_user.sent_groups.exists?(recipient_id: params[:recipient_id]) ||
+          current_api_v1_user.received_groups.exists?(sender_id: params[:recipient_id])
       end
     end
   end
