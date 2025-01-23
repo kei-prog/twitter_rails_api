@@ -24,6 +24,11 @@ class User < ApplicationRecord
   has_many :send_user, class_name: 'Notification', foreign_key: 'send_user_id', dependent: :destroy,
                        inverse_of: :send_user
 
+  has_many :sent_groups, class_name: 'Group', foreign_key: 'sender_id', dependent: :destroy, inverse_of: :sender
+  has_many :received_groups, class_name: 'Group', foreign_key: 'recipient_id', dependent: :destroy,
+                             inverse_of: :recipient
+  has_many :messages, foreign_key: 'sender_id', dependent: :destroy, inverse_of: :sender
+
   validates :name, presence: true, length: { maximum: 50 }, uniqueness: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :introduction, length: { maximum: 160 }, allow_blank: true

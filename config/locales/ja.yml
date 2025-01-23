@@ -3,6 +3,7 @@ ja:
     models:
       tweet: ツイート
       user: ユーザ
+      group: グループ
     attributes:
       comment:
         body: 本文
@@ -31,6 +32,12 @@ ja:
               too_large: "は280文字以内で入力してください。"
         comment:
           not_found: "コメントが見つかりません。"
+          attributes:
+            body:
+              too_large: "は280文字以内で入力してください。"
+        group:
+          same_user: "送信者と受信者は異なる必要があります。"
+        message:
           attributes:
             body:
               too_large: "は280文字以内で入力してください。"
