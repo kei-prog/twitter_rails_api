@@ -10,6 +10,8 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
   has_one_attached :header
+  has_many :bookmarks, dependent: :destroy
+  has_many :bookmarked_tweets, through: :bookmarks, source: :tweet
   has_many :tweets, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :retweets, dependent: :destroy

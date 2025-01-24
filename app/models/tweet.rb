@@ -3,6 +3,8 @@
 class Tweet < ApplicationRecord
   include BodyValidation
   include Sortable
+  has_many :bookmarks, dependent: :destroy
+  has_many :bookmarking_users, through: :bookmarks, source: :user
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :retweets, dependent: :destroy
@@ -17,7 +19,7 @@ class Tweet < ApplicationRecord
       Rails.application.routes.url_helpers.rails_blob_url(
         image, host: 'localhost:3000'
       )
-    end })
+    end, bookmarked: options[:current_user] ? bookmarked(options[:current_user]) : false })
   end
 
   def retweet_count
@@ -26,6 +28,10 @@ class Tweet < ApplicationRecord
 
   def favorite_count
     favorites.count
+  end
+
+  def bookmarked(current_user)
+    current_user.bookmarks.exists?(tweet_id: id)
   end
 
   private
