@@ -45,6 +45,8 @@ users.each do |user|
 
   next if user[:user] == users.first[:user]
 
+  Bookmark.create!(user: users.first[:user], tweet: user[:last_tweet])
+
   group = Group.create!(
     sender: user[:user],
     recipient: users.first[:user]
