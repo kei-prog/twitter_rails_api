@@ -21,5 +21,16 @@ RSpec.describe 'Api::V1::Users::Registrations' do
 
       expect(response).to have_http_status(:ok)
     end
+
+    it 'deletes a user' do
+      user = create(:user)
+      sign_in user
+
+      expect do
+        delete '/api/v1/users'
+      end.to change(User, :count).by(-1)
+
+      expect(response).to have_http_status(:ok)
+    end
   end
 end
