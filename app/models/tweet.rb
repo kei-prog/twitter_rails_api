@@ -19,7 +19,7 @@ class Tweet < ApplicationRecord
       Rails.application.routes.url_helpers.rails_blob_url(
         image, host: 'localhost:3000'
       )
-    end, bookmarked: options[:current_user] ? bookmarked(options[:current_user]) : false })
+    end, bookmarked: options[:current_user] ? bookmarked_by?(options[:current_user]) : false })
   end
 
   def retweet_count
@@ -30,7 +30,7 @@ class Tweet < ApplicationRecord
     favorites.count
   end
 
-  def bookmarked(current_user)
+  def bookmarked_by?(current_user)
     current_user.bookmarks.exists?(tweet_id: id)
   end
 
