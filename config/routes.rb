@@ -14,11 +14,13 @@ Rails.application.routes.draw do
         resources :comments, only: %i[index create]
         post 'toggle_retweet', to: 'retweets#toggle_retweet'
         post 'toggle_favorite', to: 'favorites#toggle_favorite'
+        post 'toggle_bookmark', to: 'bookmarks#toggle_bookmark'
       end
 
       resources :comments, only: %i[destroy]
       resource :profile, only: %i[update]
       resources :notifications, only: %i[index]
+      resources :bookmarks, only: %i[index]
 
       resources :users, only: %i[show] do
         resources :comments, only: %i[index]

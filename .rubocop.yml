@@ -19,6 +19,7 @@ RSpec/ExampleLength:
   Max: 10
 Hc/RailsSpecificActionName:
   Exclude:
+    - "app/controllers/api/v1/bookmarks_controller.rb"
     - "app/controllers/api/v1/retweets_controller.rb"
     - "app/controllers/api/v1/favorites_controller.rb"
 Metrics/BlockLength:
